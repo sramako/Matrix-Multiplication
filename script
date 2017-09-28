@@ -1,0 +1,16 @@
+sudo javac -classpath /usr/local/hadoop/share/hadoop/common/hadoop-common-2.7.2.jar:/usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.2.jar:/usr/local/hadoop/share/hadoop/common/lib/commons-cli-1.2.jar:com.sun.tools.javac.Main -d /home/hduser/a0/ multiply.java 
+sudo rm class/* 
+
+sudo cp *.class class
+
+sudo jar -cvf multiply.jar -C /home/hduser/a0/class/ .
+
+hdfs dfs -rm -r Output
+
+hadoop jar /home/hduser/a0/multiply.jar multiply
+
+sudo rm part* _SUCCESS
+
+hdfs dfs -get Output/*
+
+sudo cat part*
